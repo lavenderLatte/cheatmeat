@@ -1,0 +1,5 @@
+const baseURL = 'https://od-api.oxforddictionaries.com/api/v2'
+const oxfordAuth = {
+  app_id: '103a9365',
+  app_key: 'b75679bca2dae619c9b2e93353c1a018'
+}
