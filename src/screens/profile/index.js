@@ -32,7 +32,7 @@ class Profile extends React.Component {
 
             <View style={styles.fieldGroup}>
               <Text style={styles.label}>Name</Text>
-              <Text>Just Code</Text>
+              <Text>Trojan Tommy</Text>
             </View>
             <View style={styles.fieldGroup}>
               <Text style={styles.label}>Gender</Text>
@@ -40,11 +40,11 @@ class Profile extends React.Component {
             </View>
             <View style={styles.fieldGroup}>
               <Text style={styles.label}>Age</Text>
-              <Text>It is a secret :P </Text>
+              <Text>Yong in spirit</Text>
             </View>
             <View style={styles.fieldGroup}>
-              <Text style={styles.label}>Address</Text>
-              <Text>Somewhere out there in Singapore!</Text>
+              <Text style={styles.label}>Email Address</Text>
+              <Text>trojan@usc.edu</Text>
             </View>
           </ScrollView>
         </SafeAreaView>
