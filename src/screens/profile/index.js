@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import Header from '../../components/header';
 import commonStyles from '../../../commonStyles';
 
-class Profle extends React.Component {
+class Profile extends React.Component {
   
   render() {
     return (
@@ -25,7 +25,7 @@ class Profle extends React.Component {
           >
             
             <View style={[commonStyles.column, commonStyles.header]}>
-              <Image style={commonStyles.logo} source={require('../../../assets/icon.png')} />
+              <Image style={commonStyles.logo} source={require('../../../assets/cat.png')} />
             </View>
             
             <View style={{minHeight: 10, maxHeight: 10}}></View>
@@ -67,6 +67,6 @@ const styles = StyleSheet.create({
 export default (props) => {
   const navigation = useNavigation();
   return (
-    <Profle {...props} navigation={navigation} />
+    <Profile {...props} navigation={navigation} />
   )
 }

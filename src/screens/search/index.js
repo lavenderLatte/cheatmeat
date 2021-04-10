@@ -68,14 +68,14 @@ class Search extends React.Component {
       <>
         <SafeAreaView
           style={commonStyles.content}>
-          <Header navigation={this.props.navigation} Title={'My Dictionary'} isAtRoot={true} />
+          <Header navigation={this.props.navigation} Title={'CheatMeat'} isAtRoot={true} />
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
           >
             
             <View style={[commonStyles.column, commonStyles.header]}>
-              <Image style={commonStyles.logo} source={require('../../../assets/icon.png')} />
-              <Text style={commonStyles.sectionTitle}>Just Code Dictionary</Text>
+              <Image style={commonStyles.logo} source={require('../../../assets/cat.png')} />
+              <Text style={commonStyles.sectionTitle}>Picky Eater </Text>
             </View>
             
             <TextInput

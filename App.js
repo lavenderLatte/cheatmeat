@@ -21,8 +21,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 
-import Home from './src/screens/search';
-import History from './src/screens/fav';
+import Search from './src/screens/search'; // --> home
+import Fav from './src/screens/fav'; // --> history
 import Scan from './src/screens/scan';
 import Profile from './src/screens/profile';
 import Store from './src/screens/store';
@@ -68,16 +68,19 @@ const TabNav = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = 'logo-react';
 
-          if (route.name === 'Home') {
-            iconName = 'ios-search';
-          } else if (route.name === 'History') {
-            iconName = focused ? 'ios-heart' : 'ios-heart-outline';
-          } else if (route.name === 'Scan') {
+          if (route.name === 'Home') { 
+            iconName = 'ios-home';
+          } 
+          else if (route.name === 'History') { 
+            iconName ='receipt-outline';
+          } 
+          else if (route.name === 'Scan') {
             iconName = focused ? 'ios-camera' : 'ios-camera-outline';
-          } else if (route.name === 'Store') {
-            iconName = focused ? 'ios-heart' : 'ios-heart-outline';
+          } 
+          else if (route.name === 'Store') {
+            iconName = focused ? 'cart-outline' : 'ios-search';
           } else if (route.name === 'Recipe') {
-            iconName = focused ? 'ios-heart' : 'ios-heart-outline';
+            iconName = focused ? 'nutrition' : 'nutrition-outline';
           }
 
           
@@ -95,9 +98,12 @@ const TabNav = () => {
         tabStyle: {paddingBottom: 15}
       }}
     >
-      <Tab.Screen name="Search" component={Search} />
-      <Tab.Screen name="Fav" component={Fav} />
+      <Tab.Screen name="Home" component={Search} />
+      <Tab.Screen name="History" component={Fav} />
       <Tab.Screen name="Scan" component={Scan} />
+      <Tab.Screen name="Store" component={Store} />
+      <Tab.Screen name="Recipe" component={Recipe} />
+
     </Tab.Navigator>
   );
 }

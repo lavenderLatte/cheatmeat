@@ -65,7 +65,7 @@ class FavDetail extends React.Component {
             contentInsetAdjustmentBehavior="automatic"
           >
             <View style={[commonStyles.column, commonStyles.header]}>
-              <Image style={commonStyles.logo} source={require('../../../assets/icon.png')} />
+              <Image style={commonStyles.logo} source={require('../../../assets/cat.png')} />
             </View>
             
             <View style={{minHeight: 10, maxHeight: 10}}></View>

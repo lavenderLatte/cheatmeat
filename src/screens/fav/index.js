@@ -115,7 +115,7 @@ class Fav extends React.Component {
           <View style={[
             commonStyles.header
           ]}>
-            <Image style={commonStyles.logo} source={require('../../../assets/icon.png')} />
+            <Image style={commonStyles.logo} source={require('../../../assets/cat.png')} />
           </View>
           
           <SwipeListView
