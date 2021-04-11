@@ -1,23 +1,19 @@
 import React from 'react';
 import {
   Text,
-  View
+  View,
+  StyleSheet 
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import MapView from 'react-native-maps'
 
 
 class Store extends React.Component {
   render() {
     return (
       <>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center"
-          }}>
-          <Text> Implement store screen here. </Text>
-        </View>
+        <MapView style={{ ...StyleSheet.absoluteFillObject }}> 
+        </MapView>
       </>
     );
   }
