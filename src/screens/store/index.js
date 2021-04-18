@@ -3,27 +3,26 @@ import {
   Text,
   View,
   StyleSheet,
-  StatusBar
+  StatusBar,
+  Button
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import { SearchBar } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import RBSheet from "react-native-raw-bottom-sheet";
 
 class Store extends React.Component {
+  componentDidMount() {
+    this.RBSheet.open();
+  }
   render() {
     return (
       <>
-        <SafeAreaView>
+        {/* <SafeAreaView>
           <StatusBar backgroundColor="rgba(1.0, 0, 0, 0.2)" translucent />
-          <SearchBar
-          ref='searchBar' 
-          placeholder='Find cheatmeat'
-          barStyle="default"
-          showsCancelButtonWhileEditing={false}
-          // position = absolute
-        />
-        </SafeAreaView>
+
+        </SafeAreaView> */}
 
         <MapView
           style={{ flex: 1 }}
@@ -46,13 +45,48 @@ class Store extends React.Component {
             coordinate={{ latitude: 34.0292215152339, longitude: -118.2797176929372 }}
             title="nearby trader joe's"
             description='good vegan choices here!'
-          ></Marker > 
+          ></Marker >
           <Marker
             coordinate={{ latitude: 34.02288873697428, longitude: -118.29083217294722 }}
             title="taco bell"
             description='some vegan choices here!'
-          ></Marker >          
+          ></Marker >
         </MapView>
+
+        {/* <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}> */}
+        {/* <Button title="OPEN BOTTOM SHEET" onPress={() => this.RBSheet.open()} /> */}
+        <RBSheet
+          ref={ref => {
+            this.RBSheet = ref;
+          }}
+          animationType={"slide"}
+          height={500}
+          openDuration={250}
+          minClosingHeight={50}
+          dragFromTopOnly={true}
+          closeOnDragDown={true}
+          customStyles={{
+            container: {
+              // justifyContent: "center",
+              alignItems: "center",
+              borderTopLeftRadius: 15,
+              borderTopRightRadius: 15,
+              draggableIcon: {
+                backgroundColor: "#fff"
+              }
+            }
+          }}
+        >
+          <Text> OMG!!!. I hope this text appears. </Text>
+          {/* <SearchBar
+              ref='searchBar'
+              placeholder='Find cheatmeat'
+              barStyle="default"
+              showsCancelButtonWhileEditing={false}
+            // position = absolute
+            /> */}
+        </RBSheet>
+        {/* </View> */}
       </>
     );
   }
