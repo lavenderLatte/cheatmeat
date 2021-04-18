@@ -1,22 +1,22 @@
- import React from 'react';
- import {
-   SafeAreaView,
-   StyleSheet,
-   ScrollView,
-   View,
-   Text,
-   StatusBar,
-   Image,
-   TextInput,
-   Button,
-   ActivityIndicator,
-   Linking
- } from 'react-native';
+import React from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  StatusBar,
+  Image,
+  TextInput,
+  Button,
+  ActivityIndicator,
+  Linking
+} from 'react-native';
 
 /* creates status bar */
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 /* creates navigation bar */
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -34,8 +34,8 @@ const Drawer = createDrawerNavigator();
 const DrawerNav = (props) => {
   return (
     <Drawer.Navigator>
-      <Drawer.Screen name="TabNav" component={TabNav} options={{title: 'Home'}} />
-      <Drawer.Screen name="Profile" component={Profile} options={{title: 'My Profile'}} />
+      <Drawer.Screen name="TabNav" component={TabNav} options={{ title: 'Home' }} />
+      <Drawer.Screen name="Profile" component={Profile} options={{ title: 'My Profile' }} />
 
 
     </Drawer.Navigator>
@@ -46,7 +46,7 @@ const DrawerContent = (props) => {
   return (
     <>
       <View style={commonStyles.drawerHeader}>
-        <Image source={require('./assets/unnamed.png')} style={commonStyles.drawerProfilePhoto}  />
+        <Image source={require('./assets/unnamed.png')} style={commonStyles.drawerProfilePhoto} />
       </View>
       <DrawerContentScrollView {...props}>
         <DrawerItemList activeBackgroundColor={'transparent'} {...props} />
@@ -58,44 +58,44 @@ const DrawerContent = (props) => {
     </>
   );
 }
- 
+
 /* bottom navigation bar */
 const Tab = createBottomTabNavigator();
 const TabNav = () => {
-  return(
+  return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = 'logo-react';
 
-          if (route.name === 'Home') { 
-            iconName = 'ios-home';
-          } 
-          else if (route.name === 'History') { 
-            iconName ='receipt-outline';
-          } 
+          if (route.name === 'Home') {
+            iconName = require('./assets/ham.png');
+          }
+          else if (route.name === 'History') {
+            iconName = require('./assets/clock.png');
+          }
           else if (route.name === 'Scan') {
-            iconName = focused ? 'ios-camera' : 'ios-camera-outline';
-          } 
+            iconName = require('./assets/camera.png');
+          }
           else if (route.name === 'Store') {
-            iconName = focused ? 'cart-outline' : 'ios-search';
+            iconName = require('./assets/store.png');
           } else if (route.name === 'Recipe') {
-            iconName = focused ? 'nutrition' : 'nutrition-outline';
+            iconName = require('./assets/recipe.png');
           }
 
-          
+
           // You can return any component that you like here!
-          return <Icon name={iconName} size={size} color={color} />;
+          return <Image source={iconName} size={size} color={color} style={styles.imageicon} />;
         }
       })}
       tabBarOptions={{
         activeTintColor: 'white',
         inactiveTintColor: 'gray',
-        activeBackgroundColor: '#219bd9',
-        inactiveBackgroundColor: '#d6f9ff',
-        safeAreaInsets: {bottom: 0},
-        style: {height: 70},
-        tabStyle: {paddingBottom: 15}
+        activeBackgroundColor: 'rgba(212, 216, 227, 0.3)',
+        safeAreaInsets: { bottom: 0 },
+        style: { height: 70 },
+        showLabel: false,
+        tabStyle: { paddingBottom: 15 }
       }}
     >
       <Tab.Screen name="Home" component={Search} />
@@ -109,17 +109,27 @@ const TabNav = () => {
 }
 
 
- /* functional component --> class component */
- class App extends React.Component {
-   render() {
-     return (
+/* functional component --> class component */
+class App extends React.Component {
+  render() {
+    return (
       <NavigationContainer>
         <StatusBar barStyle="default" backgroundColor="#219bd9" />
         <DrawerNav />
       </NavigationContainer>
 
-     );
-   }
+    );
   }
- 
- export default App;
+}
+
+
+const styles = StyleSheet.create({
+  imageicon: {
+    flex: 1,
+    width: 35,
+    height: 35,
+    resizeMode: 'contain'
+  }
+
+});
+export default App;
