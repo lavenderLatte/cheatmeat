@@ -21,7 +21,6 @@ class Scan extends React.Component {
     createWordList(wordBlock) {
         let wordList = [];
         // Break down all the words detected by the camera
-        // Break down all the words detected by the camera
         if (
             wordBlock &&
             wordBlock.textBlocks &&
@@ -102,14 +101,23 @@ class Scan extends React.Component {
                             <View style={styles.wordList}>{this.populateWords()}</View>
 
                             <Button
-                                title="Take picture again"
+                                title="Retake"
                                 onPress={() => {
                                     this.setState({ showCamera: true, showWordList: false });
+                                }}
+                            />
+                            <Button
+                                title="Submit"
+                                onPress={() => {
+                                    // this.setState({ showCamera: true, showWordList: false });
+                                    <Image source={require('../../../assets/point.png')} style={{ height: 300, width: 350 }} />
                                 }}
                             />
                         </ScrollView>
                     </SafeAreaView>
                 )}
+
+
             </>
         );
     }

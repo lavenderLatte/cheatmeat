@@ -13,11 +13,13 @@ import { SearchBar } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Assets } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 class Store extends React.Component {
-  componentDidMount() {
-    this.RBSheet.open();
-  }
+  // componentDidMount() {
+  //   this.RBSheet.open();
+  // }
   onMarkerPressed() {
     this.RBSheet.open();
   }
@@ -47,29 +49,61 @@ class Store extends React.Component {
         >
           {/* add more pin & modify icon */}
 
-          <Marker
-            coordinate={{ latitude: 34.04857723789541, longitude: -118.24967692396997 }}
-            title='far ass whole foods'
-            description='This is where to get beyond meat!'
+          <Marker 
+            coordinate={{ latitude: 34.022987501610416, longitude: -118.29253265962846 }}
+            title='Sprouts'
+            description='0.1 mi'
             onPress={() => this.onMarkerPressed()}
           >
             <Image source={require('../../../assets/spicon.png')} style={{ height: 35, width: 35 }} />
           </Marker >
           <Marker
+            coordinate={{ latitude: 34.02711090119319, longitude: -118.28079531990532 }}
+            title="Trader Joe's"
+            description='0.1 mi'
+            onPress={() => this.onMarkerPressed()} 
+          >
+            <Image source={require('../../../assets/traderjoes.png')} style={{ height: 35, width: 35 }} />
+          </Marker >
+          <Marker
             coordinate={{ latitude: 34.0292215152339, longitude: -118.2797176929372 }}
-            title="nearby trader joe's"
-            description='good vegan choices here!'
+            title="Whole Foods"
+            description='0.1 mi'
+            onPress={() => this.onMarkerPressed()}
+          >
+            <Image source={require('../../../assets/whicon.png')} style={{ height: 35, width: 35 }} />
+          </Marker > 
+          <Marker
+            coordinate={{ latitude: 34.02288873697428, longitude: -118.29083217294722 }}
+            title="Taco Bell"
+            description='0.1 mi'
+            onPress={() => this.onMarkerPressed()}
+          >
+            <Image source={require('../../../assets/tacobell.png')} style={{ height: 35, width: 35 }} />
+          </Marker >
+          <Marker
+            coordinate={{ latitude: 34.04211639729417, longitude: -118.29169582439991 }}
+            title="Burger King"
+            description='0.3 mi'
             onPress={() => this.onMarkerPressed()}
           >
             <Image source={require('../../../assets/bkicon.png')} style={{ height: 35, width: 35 }} />
           </Marker >
-          <Marker
-            coordinate={{ latitude: 34.02288873697428, longitude: -118.29083217294722 }}
-            title="taco bell"
-            description='some vegan choices here!'
+          <Marker   
+            coordinate={{ latitude: 34.005125121065, longitude: -118.28019451179 }}
+            title="Burger King"
+            description='0.2 mi'
             onPress={() => this.onMarkerPressed()}
           >
-            <Image source={require('../../../assets/dogicon.png')} style={{ height: 35, width: 35 }} />
+            <Image source={require('../../../assets/bkicon.png')} style={{ height: 35, width: 35 }} />
+          </Marker >
+          <Marker   
+            coordinate={{ latitude: 34.012145801709146, longitude: -118.29174702454186 }}
+            title="Carl's Jr."  
+            description='0.1 mi'
+            onPress={() => this.onMarkerPressed()}
+          >
+            <Image source={require('../../../assets/carlsjr.png')} style={{ height: 35, width: 35 }} />
           </Marker >
         </MapView>
 
@@ -79,7 +113,7 @@ class Store extends React.Component {
           ref={ref => {
             this.RBSheet = ref;
           }}
-          animationType={"slide"}
+          animationType={"fade"}
           height={500}
           openDuration={250}
           minClosingHeight={50}
@@ -104,9 +138,7 @@ class Store extends React.Component {
             showsCancelButtonWhileEditing={false}
           // position = absolute
           /> */}
-          <View
-          // style={{alignItems: 'center'}}
-          >
+          <View>
             <SearchBar
               platform={'default'}
               containerStyle={{ backgroundColor: 'transparent', borderWidth: 0, borderRadius: 5 }}
@@ -118,41 +150,36 @@ class Store extends React.Component {
               lightTheme={true}
               round={true}
             />
-            <Image source={require('../../../assets/scrollimg.png')} style={{ height: 400, width: 390 }} />
-            {/* <Image source={require('../../../assets/scrollimg.png')} 
-              styles={{
-                width: '50%',
-                height: undefined,
-                aspectRatio: 1,
-              }} */}
-            {/* /> */}
+
+            <View style={styles.fixToText}>
+              <Button
+                title="Filters (0)"
+                onPress={() => Alert.alert('Left button pressed')}
+              />
+              <Button
+                title="Discounts"
+                onPress={() => Alert.alert('Middle button pressed')}
+              />
+              <Button
+                title="Trending"
+                onPress={() => Alert.alert('Right button pressed')}
+              />
+            </View>
+            <Image source={require('../../../assets/bottomdrawerimg.png')} style={{ height: 300, width: 350 }} />
           </View>
-          {/* <View
-            style={{
-              // flex: 1,
-              alignItems: 'center',
-              flexDirection: 'row',
-              paddingHorizontal: 0,
-              // height: StatusBar.currentHeight,
-            }}>
-            <SearchBar
-              round
-              platform={'default'}
-              placeholder="Search"
-              containerStyle={{
-                flex: 1,
-                backgroundColor: 'transparent',
-              }}
-            />
-          </View> */}
-
-
         </RBSheet>
-        {/* </View> */}
       </>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
+
 export default (props) => {
   const navigation = useNavigation();
   return (
