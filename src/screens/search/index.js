@@ -72,12 +72,12 @@
 //           <ScrollView
 //             contentInsetAdjustmentBehavior="automatic"
 //           >
-            
+
 //             <View style={[commonStyles.column, commonStyles.header]}>
 //               <Image style={commonStyles.logo} source={require('../../../assets/cat.png')} />
 //               <Text style={commonStyles.sectionTitle}>Picky Eater </Text>
 //             </View>
-            
+
 //             <TextInput
 //               style={{ height: 40, borderColor: 'gray', borderWidth: 1, paddingLeft: 4, paddingRight: 4 }}
 //               onChangeText={text => this.onUserWordChange(text)}
@@ -172,33 +172,34 @@ const DATA = [
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {userWord: '', errorMsg: '', loading: false, definition: null};
+    this.state = { userWord: '', errorMsg: '', loading: false, definition: null };
   }
-  
+
   renderCategory = ({ item }) => (
-      <View style = {styles.item}>
-        <Image style={styles.categoriesPhoto} source={item.image_url} />
-        <Text style={styles.discountText}> DISCOUNTS </Text>
-        <Text style={styles.title}>{item.title}</Text>
-         <Text style={styles.description} >{item.description}</Text>
-      </View>
+    <View style={styles.item}>
+      <Image style={styles.categoriesPhoto} source={item.image_url} />
+      <Text style={styles.discountText}> DISCOUNTS </Text>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.description} >{item.description}</Text>
+    </View>
 
   );
 
   render() {
     return (
-      <>  
+      <>
         <SafeAreaView>
-          <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
-          <View>
-            <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
-            <View style={styles.mainImage}> 
-            <Image source={require('../../../assets/progress.png')} /> 
-            </View>
-            <View style={styles.featuresBox}>
-              <Icon name='fire' style={{color: '#9EA3B0' }} size={20} />
-              <Text style={styles.featured}> Featured for you </Text>
-            </View>
+          <ScrollView>
+            <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
+            <View>
+              <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
+              <View style={styles.mainImage}>
+                <Image source={require('../../../assets/progress.png')} />
+              </View>
+              <View style={styles.featuresBox}>
+                <Icon name='fire' style={{ color: '#9EA3B0' }} size={20} />
+                <Text style={styles.featured}> Featured for you </Text>
+              </View>
               <View>
                 <FlatList
                   horizontal
@@ -207,7 +208,8 @@ class Search extends React.Component {
                   keyExtractor={item => `${item.id}`}
                 />
               </View>
-          </View>
+            </View>
+          </ScrollView>
         </SafeAreaView>
       </>
     );
@@ -240,7 +242,7 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1.0,
     elevation: 3,
-    flex:3
+    flex: 3
   },
   item: {
     // backgroundColor: '#FFFEF2',
@@ -256,17 +258,17 @@ const styles = StyleSheet.create({
     // borderWidth: 0.2,
     // borderRadius: 20,
     // marginVertical: 20,
-      padding: 5,
+    padding: 5,
 
-      width: 185,
-      height: 270,
-      backgroundColor: '#FFFFFF',
-      
-      // box-shadow: 0px 0px 15px rgba(158, 163, 176, 0.25),
-      borderRadius: 20,
-      flex: 0,
-      marginHorizontal: 10,
-      marginTop:20,
+    width: 185,
+    height: 270,
+    backgroundColor: '#FFFFFF',
+
+    // box-shadow: 0px 0px 15px rgba(158, 163, 176, 0.25),
+    borderRadius: 20,
+    flex: 0,
+    marginHorizontal: 10,
+    marginTop: 20,
 
   },
   title: {
@@ -283,7 +285,7 @@ const styles = StyleSheet.create({
     color: '#444444',
     fontWeight: 'bold',
     padding: 5,
-    
+
   },
   description: {
     color: '#969ba8',
@@ -304,7 +306,7 @@ const styles = StyleSheet.create({
   mainImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:20,
+    marginTop: 20,
   },
   mainTitle: {
     fontSize: 30,

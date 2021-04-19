@@ -51,7 +51,7 @@ class Scan extends React.Component {
     onOCRCapture(recogonizedText) {
         console.log('onCapture', recogonizedText);
         this.setState({
-            viewType: 1,
+            viewType: 1
         });
 
         this.createWordList(recogonizedText);
