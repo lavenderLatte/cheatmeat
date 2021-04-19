@@ -125,7 +125,14 @@ class Scan extends React.Component {
                         <ScrollView contentInsetAdjustmentBehavior="automatic">
                             <View> 
                                 <Image source={require('../../../assets/point.png')} style={{ height: 500, width: 400,}} />
-                            </View>                            
+                            </View> 
+
+                             <Button
+                                title="Retake"
+                                onPress={() => {
+                                    this.setState({ viewType: 0 });
+                                }}
+                            />                           
                         </ScrollView>
                     </SafeAreaView>
                 )}
