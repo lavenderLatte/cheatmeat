@@ -1,122 +1,3 @@
-// import React from 'react';
-// import {
-//   SafeAreaView,
-//   ScrollView,
-//   View,
-//   Text,
-//   Image,
-//   TextInput,
-//   Button,
-//   ActivityIndicator
-// } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-
-// import Api from '../../lib/api';
-// import Helper from '../../lib/helper';
-// import WordDefinition from '../../components/wordDef';
-// import Header from '../../components/header';
-// import commonStyles from '../../../commonStyles';
-
-// class Search extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {userWord: '', errorMsg: '', loading: false, definition: null};
-//   }
-
-//   onUserWordChange(text) {
-//     this.setState({userWord: text});
-//   }
-
-//   async onSearch() {
-//     if(this.state.userWord.length <= 0) {
-//       this.setState({errorMsg: 'Please specify the word to lookup.'})
-//       return;
-//     }
-
-//     try {
-//       this.setState({loading: true});
-//       let lemmas = await Api.getLemmas(this.state.userWord);
-//       console.log('Lemmas: ', lemmas);
-//       if(lemmas.success) {
-//         let headWord = Helper.carefullyGetValue(lemmas, ['payload', 'results', '0', 'lexicalEntries', '0', 'inflectionOf', '0', 'id'], '');
-//         console.log('Headword is: ', headWord);
-//         if(headWord.length > 0) {
-//           let wordDefinition = await Api.getDefinition(headWord);
-//           if(wordDefinition.success) {
-//             this.setState({errorMsg: '', loading: false, definition: wordDefinition.payload});
-//             console.log('Word Definition: ', wordDefinition.payload);
-//           }
-//           else {
-//             this.setState({errorMsg: 'Unable to get result from Oxford: ' + wordDefinition.message, loading: false, definition: null});
-//           }
-//         }
-//         else {
-//           this.setState({errorMsg: 'Invalid word. Please specify a valid word.', loading: false, definition: null});
-//         }
-//       }
-//       else {
-//         this.setState({errorMsg: 'Unable to get result from Oxford: ' + lemmas.message, loading: false, definition: null});
-//       }
-//     } catch (error) {
-//       console.log('Error: ', error);
-//       this.setState({loading: false, errorMsg: error.message, definition: null});
-//     }
-//   }
-
-//   render() {
-//     return (
-//       <>
-//         <SafeAreaView
-//           style={commonStyles.content}>
-//           <Header navigation={this.props.navigation} Title={'CheatMeat'} isAtRoot={true} />
-//           <ScrollView
-//             contentInsetAdjustmentBehavior="automatic"
-//           >
-            
-//             <View style={[commonStyles.column, commonStyles.header]}>
-//               <Image style={commonStyles.logo} source={require('../../../assets/cat.png')} />
-//               <Text style={commonStyles.sectionTitle}>Picky Eater </Text>
-//             </View>
-            
-//             <TextInput
-//               style={{ height: 40, borderColor: 'gray', borderWidth: 1, paddingLeft: 4, paddingRight: 4 }}
-//               onChangeText={text => this.onUserWordChange(text)}
-//               placeholder={'Key in the word to search'}
-//               value={this.state.userWord}
-//             />
-
-//             <View style={{minHeight: 10, maxHeight: 10}}></View>
-
-//             <Button
-//               title="Search"
-//               onPress={() => this.onSearch()}
-//             />
-
-//             {
-//               this.state.errorMsg.length > 0 &&
-//               <Text style={commonStyles.errMsg}>{this.state.errorMsg}</Text>
-//             }
-
-//             {/* Display word definition as custom component */}
-//             <WordDefinition def={this.state.definition} />
-//           </ScrollView>
-//         </SafeAreaView>
-//         {
-//           this.state.loading &&
-//           <ActivityIndicator style={commonStyles.loading} size="large" color={'#219bd9'} />
-//         }
-//       </>
-//     );
-//   }
-// }
-
-// export default (props) => {
-//   const navigation = useNavigation();
-//   return (
-//     <Search {...props} navigation={navigation} />
-//   )
-// }
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -130,7 +11,7 @@ import {
   SectionList,
   ListItem,
   StyleSheet,
-  FlatList
+  FlatList,TouchableHighlight, Linking,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -140,6 +21,7 @@ import WordDefinition from '../../components/wordDef';
 import Header from '../../components/header';
 import commonStyles from '../../../commonStyles';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
 
 
 const DATA = [
@@ -176,6 +58,7 @@ class Search extends React.Component {
   }
   
   renderCategory = ({ item }) => (
+
       <View style = {styles.item}>
         <Image style={styles.categoriesPhoto} source={item.image_url} />
         <Text style={styles.discountText}> DISCOUNTS </Text>
@@ -192,8 +75,8 @@ class Search extends React.Component {
           <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
           <View>
             <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
-            <View style={styles.mainImage}> 
-            <Image source={require('../../../assets/progress.png')} /> 
+            <View > 
+            <Image style={styles.mainImage} source={require('../../../assets/progress-high.png')} /> 
             </View>
             <View style={styles.featuresBox}>
               <Icon name='fire' style={{color: '#9EA3B0' }} size={20} />
@@ -218,6 +101,7 @@ export default (props) => {
   const navigation = useNavigation();
   return (
     <Search {...props} navigation={navigation} />
+    // <ScannerScreen  {...props} navigation={navigation} />
   )
 }
 
@@ -243,31 +127,15 @@ const styles = StyleSheet.create({
     flex:3
   },
   item: {
-    // backgroundColor: '#FFFEF2',
-    // // padding: 10,
-    // // marginVertical: 8,
-    // // marginHorizontal: 16,
-    // flex: 1,
-    // margin: 10,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // height: 215,
-    // borderColor: '#cccccc',
-    // borderWidth: 0.2,
-    // borderRadius: 20,
-    // marginVertical: 20,
       padding: 5,
-
       width: 185,
       height: 270,
       backgroundColor: '#FFFFFF',
-      
       // box-shadow: 0px 0px 15px rgba(158, 163, 176, 0.25),
       borderRadius: 20,
       flex: 0,
       marginHorizontal: 10,
       marginTop:20,
-
   },
   title: {
     fontSize: 20,
@@ -298,18 +166,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15,
     marginHorizontal: 10,
-
-
   },
   mainImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:20,
+    marginTop:5,
+    width: 400,
+    height: 250,
+    resizeMode: 'contain',
+    marginBottom: 5,
+
   },
   mainTitle: {
     fontSize: 30,
     fontWeight: 'bold',
     marginHorizontal: 10,
     marginTop: 10,
+
+
   }
 });
