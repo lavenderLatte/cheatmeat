@@ -11,7 +11,7 @@ import {
   SectionList,
   ListItem,
   StyleSheet,
-  FlatList,TouchableHighlight, Linking,
+  FlatList,TouchableHighlight, Linking, TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -21,6 +21,7 @@ import WordDefinition from '../../components/wordDef';
 import Header from '../../components/header';
 import commonStyles from '../../../commonStyles';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
+import Modal from 'react-native-modal';
 
 
 
@@ -54,17 +55,38 @@ const DATA = [
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {userWord: '', errorMsg: '', loading: false, definition: null};
+    this.state = {userWord: '', errorMsg: '', loading: false, definition: null, isModalVisible:false};
   }
+
+  openModal = () =>{
+    this.setState({
+    isModalVisible:true
+    })
+  }
+  closeModal = () =>{
+    this.setState({
+    isModalVisible:false
+    })
+  }
+
   
   renderCategory = ({ item }) => (
-
+      <TouchableOpacity onPress={()=>this.openModal()}>
       <View style = {styles.item}>
+        <Modal isVisible={this.state.isModalVisible} 
+        onBackdropPress={()=>this.closeModal()} 
+        onSwipeComplete={()=>this.closeModal()}>
+            <View style={styles.popup}>
+        <Image style={styles.barcodeImage}
+        source={require('../../../assets/barcode.png')} />           
+         </View> 
+        </Modal>
         <Image style={styles.categoriesPhoto} source={item.image_url} />
         <Text style={styles.discountText}> DISCOUNTS </Text>
         <Text style={styles.title}>{item.title}</Text>
          <Text style={styles.description} >{item.description}</Text>
       </View>
+      </TouchableOpacity>
 
   );
 
@@ -106,6 +128,17 @@ export default (props) => {
 }
 
 const styles = StyleSheet.create({
+  popup:  {
+
+  },
+  barcodeImage: {
+    width: 350,
+    height: 200,
+    resizeMode: 'contain',
+    justifyContent:'center',
+    textAlign:'center',
+
+  },
   container: {
     flex: 1,
     marginTop: 50,
@@ -123,7 +156,6 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 5,
     shadowOpacity: 1.0,
-    elevation: 3,
     flex:3
   },
   item: {

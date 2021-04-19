@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 5,
     shadowOpacity: 1.0,
-    elevation: 3,
     flex:3
   },
   item: {
