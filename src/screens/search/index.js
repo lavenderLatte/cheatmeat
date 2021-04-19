@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
     height: 200,
     resizeMode: 'contain',
     justifyContent:'center',
-    textAlign:'center',
 
   },
   container: {

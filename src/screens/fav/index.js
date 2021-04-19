@@ -20,6 +20,7 @@ import moment from 'moment';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FavDetail from '../favDetail';
 import Header from '../../components/header';
+import Modal from 'react-native-modal';
 
 
 
@@ -28,19 +29,24 @@ const DATA = [
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
     title: 'Farmhouse hero',
     image_url: require('../../../assets/illustration.png'),
-    description: 'Earned on April 10'
+    description: 'Earned on April 10',
+    popuptext: 'You recently opted for a plant-based burger over a meat patty. That\'s like saving 50 cows from the slaughterhouse!',
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
     title: 'Gone green',
     image_url: require('../../../assets/car.png'),
-    description: 'Earned on April 10'
+    description: 'Earned on April 10',
+    popuptext: 'You recently opted for a plant-based burger over a meat patty. That\'s like saving 50 cows from the slaughterhouse!',
+
+
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
     title: 'Grocery run',
     image_url: require('../../../assets/illustration.png'),
-    description: 'Earned on April 10'
+    description: 'Earned on April 10',
+    popuptext: 'You recently opted for a plant-based burger over a meat patty. That\'s like saving 50 cows from the slaughterhouse!',
 
   },
 ];
@@ -55,17 +61,17 @@ const HISTORY_DATA = [
   },
   {
     id: '2',
-    title: 'Monty\'s Good Burger',
-    date: 'Today',
-    image_url: require('../../../assets/montys_store.png'),
+    title: 'Sprouts Farmer\'s Market',
+    date: 'Yesterday',
+    image_url: require('../../../assets/sprouts-store.png'),
     points: '+2 pts',
   },
   {
     id: '3',
-    title: 'Monty\'s Good Burger',
-    date: 'Today',
-    image_url: require('../../../assets/montys_store.png'),
-    points: '+2 pts',
+    title: 'Belcampo Meat Co.',
+    date: 'April  1',
+    image_url: require('../../../assets/belcampo-store.png'),
+    points: '+1 pt',
   },
 
 ];
@@ -75,13 +81,39 @@ const HISTORY_DATA = [
 class Fav extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {isModalVisible:false};
+
+  }
+
+  openModal = () =>{
+    this.setState({
+    isModalVisible:true
+    })
+  }
+  closeModal = () =>{
+    this.setState({
+    isModalVisible:false
+    })
   }
   renderCategory = ({ item }) => (
+    <TouchableOpacity onPress={()=>this.openModal()}>
+
       <View style = {styles.item}>
         <Image style={styles.categoriesPhoto} source={item.image_url} />
         <Text style={styles.title}>{item.title}</Text>
          <Text style={styles.description} >{item.description}</Text>
       </View>
+        <Modal isVisible={this.state.isModalVisible} 
+            onBackdropPress={()=>this.closeModal()} 
+            onSwipeComplete={()=>this.closeModal()}>
+            <View style={styles.popup}>
+              <Image style={styles.popupPhoto}
+              source={item.image_url}/>     
+              <Text style={styles.popUpDate} >{item.description}</Text>
+              <Text style={styles.description} >{item.popuptext}</Text>
+            </View> 
+        </Modal>
+    </TouchableOpacity>
 
   );
   renderHistoryCategory = ({ item }) => (
@@ -131,6 +163,31 @@ class Fav extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  popup:{
+    width: 290,
+    height: 350,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 30,
+    borderRadius: 20,
+    padding: 5,
+  },
+  popupPhoto:{ 
+    width: 150,
+    height: 150,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+
+  },
+  popUpDate:{
+    color: '#969ba8',
+    marginTop: 4,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
   earned: {
     color: '#333333',
     marginHorizontal: 10,
@@ -195,8 +252,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   points: {
-    marginLeft: 100,
     marginTop: 10,
+    textAlign: 'right',
+    flex:1,
   }
 });
 
