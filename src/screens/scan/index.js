@@ -6,6 +6,7 @@ import {
     SafeAreaView,
     ScrollView,
     Button,
+    Image
 } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import Camera, {Constants} from '../../components/camera';
@@ -14,9 +15,12 @@ import commonStyles from '../../../commonStyles';
 class Scan extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { wordList: null, showCamera: true, showWordList: false };
+        this.state = { wordList: null, viewType: 0};
         console.log('scan screen started... ');
     }
+    componentDidMount() {
+        this.setState({viewType: 0});
+      }
 
     createWordList(wordBlock) {
         let wordList = [];
@@ -47,8 +51,7 @@ class Scan extends React.Component {
     onOCRCapture(recogonizedText) {
         console.log('onCapture', recogonizedText);
         this.setState({
-            showCamera: false,
-            showWordList: true,
+            viewType: 1,
         });
 
         this.createWordList(recogonizedText);
@@ -78,7 +81,7 @@ class Scan extends React.Component {
     render() {
         return (
             <>
-                {this.state.showCamera && (
+                {(this.state.viewType == 0) && (
                     <View style={styles.container}>
                         <Camera
                             cameraType={Constants.Type.back}
@@ -95,7 +98,7 @@ class Scan extends React.Component {
                         />
                     </View>
                 )}
-                {this.state.showWordList && (
+                {(this.state.viewType == 1) && (
                     <SafeAreaView style={commonStyles.content}>
                         <ScrollView contentInsetAdjustmentBehavior="automatic">
                             <View style={styles.wordList}>{this.populateWords()}</View>
@@ -103,16 +106,26 @@ class Scan extends React.Component {
                             <Button
                                 title="Retake"
                                 onPress={() => {
-                                    this.setState({ showCamera: true, showWordList: false });
+                                    this.setState({ viewType: 0 });
                                 }}
                             />
                             <Button
                                 title="Submit"
                                 onPress={() => {
+                                    this.setState({ viewType: 2});
                                     // this.setState({ showCamera: true, showWordList: false });
                                     <Image source={require('../../../assets/point.png')} style={{ height: 300, width: 350 }} />
                                 }}
                             />
+                        </ScrollView>
+                    </SafeAreaView>
+                )}
+                {(this.state.viewType == 2) && (
+                    <SafeAreaView style={commonStyles.content}>
+                        <ScrollView contentInsetAdjustmentBehavior="automatic">
+                            <View> 
+                                <Image source={require('../../../assets/point.png')} style={{ height: 500, width: 400,}} />
+                            </View>                            
                         </ScrollView>
                     </SafeAreaView>
                 )}
