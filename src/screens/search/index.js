@@ -94,6 +94,7 @@ class Search extends React.Component {
     return (
       <>
         <SafeAreaView>
+          <ScrollView>
           <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
           <View>
             <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
