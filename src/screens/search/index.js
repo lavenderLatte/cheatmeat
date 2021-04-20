@@ -92,7 +92,7 @@ class Search extends React.Component {
 
   render() {
     return (
-      <>  
+      <>
         <SafeAreaView>
           <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
           <View>
@@ -112,7 +112,8 @@ class Search extends React.Component {
                   keyExtractor={item => `${item.id}`}
                 />
               </View>
-          </View>
+            </View>
+          </ScrollView>
         </SafeAreaView>
       </>
     );
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
     color: '#444444',
     fontWeight: 'bold',
     padding: 5,
-    
+
   },
   description: {
     color: '#969ba8',
