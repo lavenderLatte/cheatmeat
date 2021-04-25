@@ -131,6 +131,7 @@ class Scan extends React.Component {
                 {(this.state.viewType == 1) && (
                     
                     <SafeAreaView style={commonStyles.content}>
+                        <ScrollView>
                         <View style={styles.wordList}>{this.populateWords()}</View>
                         <View>
                             <Image source={require('../../../assets/receiptsummary.png')} style={styles.receiptSummary} />
@@ -151,6 +152,7 @@ class Scan extends React.Component {
                             >
                             </Button>
                         </View>
+                        </ScrollView>
                     </SafeAreaView>
                     
                 )}
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
         height: 400,
         width: 350,
         alignSelf: 'center',
-        marginTop: 260,
+        marginTop: 70,
         // justifyContent: 'space-evenly',
     },
     fixToText: {
