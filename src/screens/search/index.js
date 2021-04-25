@@ -11,7 +11,7 @@ import {
   SectionList,
   ListItem,
   StyleSheet,
-  FlatList,TouchableHighlight, Linking, TouchableOpacity,
+  FlatList, TouchableHighlight, Linking, TouchableOpacity,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -55,38 +55,38 @@ const DATA = [
 class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {userWord: '', errorMsg: '', loading: false, definition: null, isModalVisible:false};
+    this.state = { userWord: '', errorMsg: '', loading: false, definition: null, isModalVisible: false };
   }
 
-  openModal = () =>{
+  openModal = () => {
     this.setState({
-    isModalVisible:true
+      isModalVisible: true
     })
   }
-  closeModal = () =>{
+  closeModal = () => {
     this.setState({
-    isModalVisible:false
+      isModalVisible: false
     })
   }
 
-  
+
   renderCategory = ({ item }) => (
-      <TouchableOpacity onPress={()=>this.openModal()}>
-      <View style = {styles.item}>
-        <Modal isVisible={this.state.isModalVisible} 
-        onBackdropPress={()=>this.closeModal()} 
-        onSwipeComplete={()=>this.closeModal()}>
-            <View style={styles.popup}>
-        <Image style={styles.barcodeImage}
-        source={require('../../../assets/barcode.png')} />           
-         </View> 
+    <TouchableOpacity onPress={() => this.openModal()}>
+      <View style={styles.item}>
+        <Modal isVisible={this.state.isModalVisible}
+          onBackdropPress={() => this.closeModal()}
+          onSwipeComplete={() => this.closeModal()}>
+          <View style={styles.popup}>
+            <Image style={styles.barcodeImage}
+              source={require('../../../assets/barcode.png')} />
+          </View>
         </Modal>
         <Image style={styles.categoriesPhoto} source={item.image_url} />
         <Text style={styles.discountText}> DISCOUNTS </Text>
         <Text style={styles.title}>{item.title}</Text>
-         <Text style={styles.description} >{item.description}</Text>
+        <Text style={styles.description} >{item.description}</Text>
       </View>
-      </TouchableOpacity>
+    </TouchableOpacity>
 
   );
 
@@ -95,16 +95,16 @@ class Search extends React.Component {
       <>
         <SafeAreaView>
           <ScrollView>
-          <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
-          <View>
-            <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
-            <View > 
-            <Image style={styles.mainImage} source={require('../../../assets/progress-high.png')} /> 
-            </View>
-            <View style={styles.featuresBox}>
-              <Icon name='fire' style={{color: '#9EA3B0' }} size={20} />
-              <Text style={styles.featured}> Featured for you </Text>
-            </View>
+            <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
+            <View>
+              <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
+              <View >
+                <Image style={styles.mainImage} source={require('../../../assets/progress-high.png')} />
+              </View>
+              <View style={styles.featuresBox}>
+                <Icon name='fire' style={{ color: '#9EA3B0' }} size={20} />
+                <Text style={styles.featured}> Featured for you </Text>
+              </View>
               <View>
                 <FlatList
                   horizontal
@@ -130,14 +130,14 @@ export default (props) => {
 }
 
 const styles = StyleSheet.create({
-  popup:  {
+  popup: {
 
   },
   barcodeImage: {
     width: 350,
     height: 200,
     resizeMode: 'contain',
-    justifyContent:'center',
+    justifyContent: 'center',
 
   },
   container: {
@@ -157,18 +157,18 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 5,
     shadowOpacity: 1.0,
-    flex:3
+    flex: 3
   },
   item: {
-      padding: 5,
-      width: 185,
-      height: 270,
-      backgroundColor: '#FFFFFF',
-      // box-shadow: 0px 0px 15px rgba(158, 163, 176, 0.25),
-      borderRadius: 20,
-      flex: 0,
-      marginHorizontal: 10,
-      marginTop:20,
+    padding: 5,
+    width: 185,
+    height: 270,
+    backgroundColor: '#FFFFFF',
+    // box-shadow: 0px 0px 15px rgba(158, 163, 176, 0.25),
+    borderRadius: 20,
+    flex: 0,
+    marginHorizontal: 10,
+    marginTop: 20,
   },
   title: {
     fontSize: 20,
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   mainImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:5,
+    marginTop: 5,
     width: 400,
     height: 250,
     resizeMode: 'contain',

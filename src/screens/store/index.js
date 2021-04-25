@@ -5,7 +5,10 @@ import {
   StyleSheet,
   StatusBar,
   Button,
-  Image
+  Image,
+  Alert,
+  Modal,
+  Pressable
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
@@ -14,6 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import RBSheet from "react-native-raw-bottom-sheet";
 import { Assets } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { ScrollView } from 'react-native';
 
 
 class Store extends React.Component {
@@ -25,6 +29,7 @@ class Store extends React.Component {
   }
   state = {
     search: '',
+    imageViewType: 0,
   };
 
   updateSearch = (search) => {
@@ -47,7 +52,6 @@ class Store extends React.Component {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
-          {/* add more pin & modify icon */}
 
           <Marker 
             coordinate={{ latitude: 34.022987501610416, longitude: -118.29253265962846 }}
@@ -131,13 +135,7 @@ class Store extends React.Component {
             }
           }}
         >
-          {/* <SearchBar
-            ref='searchBar'
-            placeholder='Find cheatmeat'
-            barStyle="default"
-            showsCancelButtonWhileEditing={false}
-          // position = absolute
-          /> */}
+
           <View>
             <SearchBar
               platform={'default'}
@@ -154,18 +152,30 @@ class Store extends React.Component {
             <View style={styles.fixToText}>
               <Button
                 title="Filters (0)"
-                onPress={() => Alert.alert('Left button pressed')}
+                onPress={() => this.setState({imageViewType: 1})}
               />
               <Button
                 title="Discounts"
-                onPress={() => Alert.alert('Middle button pressed')}
+                onPress={() => this.setState({imageViewType: 2})}
               />
               <Button
                 title="Trending"
                 onPress={() => Alert.alert('Right button pressed')}
               />
             </View>
-            <Image source={require('../../../assets/bottomdrawerimg.png')} style={{ height: 300, width: 350 }} />
+            {(this.state.imageViewType == 0) && (
+              <Image source={require('../../../assets/bottomdrawerimg.png')} style={{ height: 300, width: 350 }} />
+            )}
+            {(this.state.imageViewType == 1) && (
+              <ScrollView>
+                <Image source={require('../../../assets/filter.png')} />
+              </ScrollView>
+            )}
+            {(this.state.imageViewType == 2) && (
+              <ScrollView>
+                <Image source={require('../../../assets/discountinfo.png')} />
+              </ScrollView>
+              )}
           </View>
         </RBSheet>
       </>
@@ -177,6 +187,35 @@ const styles = StyleSheet.create({
   fixToText: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "transparent",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
   },
 });
 

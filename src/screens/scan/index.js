@@ -6,21 +6,24 @@ import {
     SafeAreaView,
     ScrollView,
     Button,
-    Image
+    Image,
+    Modal,
+    TouchableOpacity,
+    Pressable
 } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import Camera, {Constants} from '../../components/camera';
+import Camera, { Constants } from '../../components/camera';
 import commonStyles from '../../../commonStyles';
 
 class Scan extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { wordList: null, viewType: 0};
+        this.state = { wordList: null, viewType: 0,  isModalVisible: false};
         console.log('scan screen started... ');
     }
     componentDidMount() {
-        this.setState({viewType: 0});
-      }
+        this.setState({ viewType: 0 });
+    }
 
     createWordList(wordBlock) {
         let wordList = [];
@@ -43,7 +46,6 @@ class Scan extends React.Component {
                     }
                 }
             }
-
             this.setState({ wordList: wordList });
         }
     }
@@ -53,7 +55,6 @@ class Scan extends React.Component {
         this.setState({
             viewType: 1
         });
-
         this.createWordList(recogonizedText);
     }
 
@@ -65,22 +66,50 @@ class Scan extends React.Component {
             wordViews.push(<Text style={styles.word}> Word list is empty.</Text>);
             return wordViews;
         }
-
         for (let idx = 0; idx < this.state.wordList.length; idx++) {
             wordViews.push(
                 <Text style={styles.word}> {this.state.wordList[idx]} </Text>,
             );
         }
-
         return wordViews;
     }
 
-
-
+    openModal = () => {
+        this.setState({
+            isModalVisible: true
+        })
+    }
+    closeModal = () => {
+        this.setState({
+            isModalVisible: false,
+            viewType: 1
+        })
+    }
 
     render() {
+        const { isModalVisible } = this.state;
+        console.log("isModalVisible = " + isModalVisible);
         return (
             <>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    backdropOpacity={0.40}
+                    visible={isModalVisible}
+                    onBackdropPress={() => this.closeModal()}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Image source={require('../../../assets/point.png')} />
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => this.closeModal()}
+                            >
+                                <Text style={styles.textStyle}>Go Back</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </Modal>
+                {/* viewType == 0: enable camera  */}
                 {(this.state.viewType == 0) && (
                     <View style={styles.container}>
                         <Camera
@@ -98,66 +127,91 @@ class Scan extends React.Component {
                         />
                     </View>
                 )}
+                {/* viewType == 1: show summary of receipt & button for retake or view reward pt */}
                 {(this.state.viewType == 1) && (
+                    
                     <SafeAreaView style={commonStyles.content}>
-                        <ScrollView contentInsetAdjustmentBehavior="automatic">
-                            <View style={styles.wordList}>{this.populateWords()}</View>
+                        <View style={styles.wordList}>{this.populateWords()}</View>
+                        <View>
+                            <Image source={require('../../../assets/receiptsummary.png')} style={styles.receiptSummary} />
+                        </View>
 
+                        <View style={styles.fixToText}>
                             <Button
-                                title="Retake"
+                                title="    Retake"
                                 onPress={() => {
                                     this.setState({ viewType: 0 });
                                 }}
                             />
                             <Button
-                                title="Submit"
+                                title="View My Reward    "
                                 onPress={() => {
-                                    this.setState({ viewType: 2});
-                                    // this.setState({ showCamera: true, showWordList: false });
-                                    <Image source={require('../../../assets/point.png')} style={{ height: 300, width: 350 }} />
+                                    this.setState({ viewType: 1, isModalVisible: true });
                                 }}
-                            />
-                        </ScrollView>
+                            >
+                            </Button>
+                        </View>
                     </SafeAreaView>
+                    
                 )}
-                {(this.state.viewType == 2) && (
-                    <SafeAreaView style={commonStyles.content}>
-                        <ScrollView contentInsetAdjustmentBehavior="automatic">
-                            <View> 
-                                <Image source={require('../../../assets/point.png')} style={{ height: 500, width: 400,}} />
-                            </View> 
-
-                             <Button
-                                title="Retake"
-                                onPress={() => {
-                                    this.setState({ viewType: 0 });
-                                }}
-                            />                           
-                        </ScrollView>
-                    </SafeAreaView>
-                )}
-
-
             </>
         );
     }
 }
 
 
-
-
 const styles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "transparent",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    popup: {
+        flex:0
+    },
+    barcodeImage: {
+        width: 350,
+        height: 200,
+        resizeMode: 'contain',
+        justifyContent: 'center',
+    
+    },
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
+    // button: {
+    //     alignItems: 'center',
+    //     backgroundColor: '#DDDDDD',
+    //     padding: 10,
+    //     marginBottom: 10,
+    // },
     button: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
+        borderRadius: 20,
         padding: 10,
-        marginBottom: 10,
-    },
+        elevation: 2
+      },
+      buttonClose: {
+        backgroundColor: "#2196F3",
+      },
+    
     closeButtonIcon: {
         fontSize: Platform.OS === 'ios' ? 40 : 40,
         fontWeight: 'bold',
@@ -170,6 +224,18 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         padding: 4,
     },
+    receiptSummary: {
+        height: 400,
+        width: 350,
+        alignSelf: 'center',
+        marginTop: 260,
+        // justifyContent: 'space-evenly',
+    },
+    fixToText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+
 });
 
 
