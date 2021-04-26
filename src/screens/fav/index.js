@@ -8,7 +8,9 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  Alert,
+  Button,
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
@@ -22,27 +24,28 @@ import FavDetail from '../favDetail';
 import Header from '../../components/header';
 import Modal from 'react-native-modal';
 
+import Team from '../team';
 
 
 const DATA = [
   {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    id: '1',
     title: 'Farmhouse hero',
     image_url: require('../../../assets/illustration.png'),
     description: 'Earned on April 10',
     popuptext: 'You recently opted for a plant-based burger over a meat patty. That\'s like saving 50 cows from the slaughterhouse!',
   },
   {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    id: '2',
     title: 'Gone green',
     image_url: require('../../../assets/car.png'),
     description: 'Earned on April 10',
-    popuptext: 'You recently opted for a plant-based burger over a meat patty. That\'s like saving 50 cows from the slaughterhouse!',
+    popuptext: 'Your carbon footprint has been improving drastically! Congratulations.',
 
 
   },
   {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    id: '3',
     title: 'Grocery run',
     image_url: require('../../../assets/illustration.png'),
     description: 'Earned on April 10',
@@ -95,6 +98,10 @@ class Fav extends React.Component {
     isModalVisible:false
     })
   }
+
+  gotoTeams = () => {
+  this.props.navigation.navigate("Team");
+      };
   renderCategory = ({ item }) => (
     <TouchableOpacity onPress={()=>this.openModal()}>
 
@@ -134,7 +141,7 @@ class Fav extends React.Component {
           <Header navigation={this.props.navigation} Title={'History'} isAtRoot={true} />
           <View>
             <Text style={styles.mainTitle}> 4 points </Text>
-            <Text style={styles.earned}>  Earned </Text>
+            <Text style={styles.earned}>  EARNED </Text>
             <View>
               <Text style={styles.achievement}> Achievements </Text>
               <View>
@@ -155,6 +162,14 @@ class Fav extends React.Component {
                   keyExtractor={item => `${item.id}`}
                 />
             </View>
+
+            <TouchableOpacity onPress={()=>this.gotoTeams()}>
+              <View style={styles.teamButton} onPress={() => Alert.alert('Simple Button pressed')}> 
+              <Text style={styles.textbtn}> View team board </Text>
+              <Text style={styles.arrow}> >> </Text>
+              </View>
+            </TouchableOpacity>
+
           </View>
         </SafeAreaView>
       </>
@@ -163,6 +178,25 @@ class Fav extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  teamButton:{
+    backgroundColor: '#F1F6ED',
+    color: '#F1F6ED',
+    width: 400,
+    height: 50,
+    alignItems: 'center',
+
+    justifyContent: 'center',
+    marginLeft: 15,
+    marginTop: 20,
+    flexDirection: 'row',
+  },
+  textbtn:{
+    fontSize: 14,
+  },
+  arrow:{
+    fontSize: 10,
+    marginTop: 1,
+  },
   popup:{
     width: 290,
     height: 350,
@@ -192,6 +226,7 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginHorizontal: 10,
     fontSize: 15,
+    fontWeight: 'bold',
   },
   achievement:{
     color: '#333333',
@@ -273,6 +308,9 @@ export default function(props) {
     >
       <Stack.Screen name="Fav" options={{title: 'Word List'}}>
         {props => <Fav {...props} isFocused={isFocused} />}
+      </Stack.Screen>
+            <Stack.Screen name="Team" >
+        {props => <Team {...props} isFocused={isFocused} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
