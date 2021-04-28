@@ -18,7 +18,7 @@ import commonStyles from '../../../commonStyles';
 class Scan extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { wordList: null, viewType: 0,  isModalVisible: false};
+        this.state = { wordList: null, viewType: 0,  isModalVisible: false, isModalVisible2: false, isModalVisible3: false};
         console.log('scan screen started... ');
     }
     componentDidMount() {
@@ -86,8 +86,37 @@ class Scan extends React.Component {
         })
     }
 
+
+    openModal2 = () => {
+        this.setState({
+            isModalVisible2: true
+        })
+    }
+
+    closeModal2 = () => {
+        this.setState({
+            isModalVisible2: false,
+        })
+    }
+
+    openModal3 = () => {
+        this.setState({
+            isModalVisible2: false,
+
+            isModalVisible3: true
+        })
+    }
+
+    closeModal3 = () => {
+        this.setState({
+            isModalVisible3: false,
+        })
+    }
     render() {
         const { isModalVisible } = this.state;
+        const { isModalVisible2 } = this.state;
+        const { isModalVisible3 } = this.state;
+
         console.log("isModalVisible = " + isModalVisible);
         return (
             <>
@@ -98,17 +127,57 @@ class Scan extends React.Component {
                     visible={isModalVisible}
                     onBackdropPress={() => this.closeModal()}>
                     <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Image source={require('../../../assets/point.png')} />
+                            <Image style={styles.modalView} source={require('../../../assets/card.png')} />
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={() => this.closeModal()}
                             >
-                                <Text style={styles.textStyle}>Go Back</Text>
+                                <Text style={styles.textStyle2}>Go Back</Text>
                             </Pressable>
-                        </View>
                     </View>
                 </Modal>
+
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    backdropOpacity={0.40}
+                    visible={isModalVisible2}
+                    onBackdropPress={() => this.closeModal2()}
+                    onSwipeComplete={() => this.closeModal2()}
+                    onPress={() => this.closeModal2()}>
+
+                    <View style={styles.centeredView2}>
+                            <Image style={styles.modalView2} source={require('../../../assets/carbonfootprint.png')} />
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => this.openModal3()}
+                            >
+                                <Text style={styles.textStyle2}>Continue</Text>
+                            </Pressable>
+                    </View>
+                    
+                </Modal>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    backdropOpacity={0.40}
+                    visible={isModalVisible3}
+                    onBackdropPress={() => this.closeModal3()}
+                    onSwipeComplete={() => this.closeModal3()}
+                    onPress={() => this.closeModal3()}>
+
+                    <View style={styles.centeredView3}>
+                            <Image style={styles.modalView3} source={require('../../../assets/co2modal.png')} />
+                            <Pressable
+                                style={[styles.button, styles.buttonClose]}
+                                onPress={() => this.closeModal3()}
+                            >
+                                <Text style={styles.textStyle2}>Done</Text>
+                            </Pressable>
+                    </View>
+                    
+                </Modal>
+                
                 {/* viewType == 0: enable camera  */}
                 {(this.state.viewType == 0) && (
                     <View style={styles.container}>
@@ -139,13 +208,19 @@ class Scan extends React.Component {
 
                         <View style={styles.fixToText}>
                             <Button
-                                title="    Retake"
+                                title=" Retake"
                                 onPress={() => {
                                     this.setState({ viewType: 0 });
                                 }}
                             />
                             <Button
-                                title="View My Reward    "
+                                title="View Carbon Footprint"
+                                onPress={() => {
+                                    this.setState({ viewType: 1, isModalVisible2: true});
+                                }}
+                            />
+                            <Button
+                                title="Reward "
                                 onPress={() => {
                                     this.setState({ viewType: 1, isModalVisible: true });
                                 }}
@@ -163,6 +238,9 @@ class Scan extends React.Component {
 
 
 const styles = StyleSheet.create({
+    textStyle2:{
+        fontWeight: 'bold',
+    },
     centeredView: {
         flex: 1,
         justifyContent: "center",
@@ -170,23 +248,43 @@ const styles = StyleSheet.create({
         marginTop: 22
     },
     modalView: {
-        margin: 20,
-        backgroundColor: "transparent",
+        width:  400,
+        height: 500,
         borderRadius: 20,
-        padding: 35,
+        alignItems: 'center',
+        resizeMode: 'contain',
+    },
+    centeredView2: {
+        flex: 1,
+        justifyContent: "center",
         alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
+        marginTop: 22
+
     },
-    popup: {
-        flex:0
+    modalView2: {
+        width: 400,
+        height: 550,
+        borderRadius: 20,
+        alignItems: 'center',
+        resizeMode: 'contain',
+
     },
+    centeredView3: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+
+    },
+    modalView3: {
+        height: 550,
+        flex: 1,
+    borderRadius: 20,
+    alignItems: 'center',
+    resizeMode: 'contain',
+
+    },
+
     barcodeImage: {
         width: 350,
         height: 200,
@@ -211,7 +309,7 @@ const styles = StyleSheet.create({
         elevation: 2
       },
       buttonClose: {
-        backgroundColor: "#2196F3",
+        backgroundColor: "#F1F6ED",
       },
     
     closeButtonIcon: {

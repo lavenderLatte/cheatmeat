@@ -20,6 +20,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 import Search from './src/screens/search'; // --> home
 import Fav from './src/screens/fav'; // --> history
@@ -111,6 +113,7 @@ const TabNav = () => {
 
 /* functional component --> class component */
 class App extends React.Component {
+
   render() {
     return (
       <NavigationContainer>
