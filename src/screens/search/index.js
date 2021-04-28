@@ -78,7 +78,7 @@ class Search extends React.Component {
           onSwipeComplete={() => this.closeModal()}>
           <View style={styles.popup}>
             <Image style={styles.barcodeImage}
-              source={require('../../../assets/barcode.png')} />
+              source={require('../../../assets/montypopup.png')} />
           </View>
         </Modal>
         <Image style={styles.categoriesPhoto} source={item.image_url} />
@@ -134,8 +134,8 @@ const styles = StyleSheet.create({
 
   },
   barcodeImage: {
-    width: 350,
-    height: 200,
+    width: '100%',
+    height: 400,
     resizeMode: 'contain',
     justifyContent: 'center',
 
