@@ -95,7 +95,7 @@ class Search extends React.Component {
       <>
         <SafeAreaView>
           <ScrollView>
-            <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} />
+            {/* <Header navigation={this.props.navigation} Title={'Home'} isAtRoot={true} /> */}
             <View>
               <Text style={styles.mainTitle}> Good morning, {"\n"} Dane! </Text>
               <View >
@@ -197,13 +197,13 @@ const styles = StyleSheet.create({
   },
   featuresBox: {
     flexDirection: 'row',
-    marginTop: 15,
+    marginTop: 30,
     marginHorizontal: 10,
   },
   mainImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 5,
+    marginTop: 10,
     width: 400,
     height: 250,
     resizeMode: 'contain',
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     marginHorizontal: 10,
-    marginTop: 10,
+    marginTop: 15,
 
 
   }

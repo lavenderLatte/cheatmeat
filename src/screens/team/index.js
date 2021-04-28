@@ -63,14 +63,6 @@ class Team extends React.Component {
             </View>
 
    <Image style={styles.leaderboard} source={require('../../../assets/leaderboard2.png')}/>
-          {/* <View>
-            <FlatList
-                  vertical
-                  data={HISTORY_DATA}
-                  renderItem={this.renderHistoryCategory}
-                  keyExtractor={item => `${item.id}`}
-                />
-          </View> */}
       </SafeAreaView>
     );
   }
@@ -86,11 +78,10 @@ const styles = StyleSheet.create({
         width: 400,
         height: 300,
         resizeMode: 'contain',
-        marginBottom:  10,
     },
     image:{
-                justifyContent: 'center', 
-        alignItems: 'center',
+      justifyContent: 'center', 
+      alignItems: 'center',
     },
     competition:{
         justifyContent: 'center', 
@@ -143,7 +134,6 @@ const styles = StyleSheet.create({
     flex:3
   },
   item: {
-
     flex: 1,
     margin: 10,
     justifyContent: 'center',

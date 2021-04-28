@@ -158,10 +158,9 @@ class Store extends React.Component {
                 title="Discounts"
                 onPress={() => this.setState({imageViewType: 2})}
               />
-              <Button
+              {/* <Button
                 title="Trending"
-                onPress={() => Alert.alert('Right button pressed')}
-              />
+              /> */}
             </View>
             {(this.state.imageViewType == 0) && (
               <Image source={require('../../../assets/bottomdrawerimg.png')} style={{ height: 300, width: 350 }} />
@@ -184,6 +183,11 @@ class Store extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  filtermodal:{
+     width: 400,
+        height: 200,
+        resizeMode: 'center',
+  },
   fixToText: {
     flexDirection: 'row',
     justifyContent: 'space-between',

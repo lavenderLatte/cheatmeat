@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   Alert,
   Button,
+  ScrollView,
 } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useIsFocused } from '@react-navigation/native';
@@ -37,19 +38,19 @@ const DATA = [
   },
   {
     id: '2',
-    title: 'Gone green',
-    image_url: require('../../../assets/car.png'),
-    description: 'Earned on April 10',
-    popuptext: 'Your carbon footprint has been improving drastically! Congratulations.',
+    title: 'Carbon Offset',
+    image_url: require('../../../assets/tree.png'),
+    description: 'Earned on March 30',
+    popuptext: 'You\'ve planted 1 tree by opting in to offset your carbon footprint. Congratulations!',
 
 
   },
   {
     id: '3',
     title: 'Grocery run',
-    image_url: require('../../../assets/illustration.png'),
-    description: 'Earned on April 10',
-    popuptext: 'You recently opted for a plant-based burger over a meat patty. That\'s like saving 50 cows from the slaughterhouse!',
+    image_url: require('../../../assets/grocery.png'),
+    description: 'Earned on March 19',
+    popuptext: 'Your last month\'s grocery haul had limited platic use. Congratulations!',
 
   },
 ];
@@ -138,8 +139,10 @@ class Fav extends React.Component {
     return (
       <>
         <SafeAreaView>
-          <Header navigation={this.props.navigation} Title={'History'} isAtRoot={true} />
+          {/* <Header navigation={this.props.navigation} Title={'History'} isAtRoot={true} /> */}
           <View>
+                      <ScrollView>
+
             <Text style={styles.mainTitle}> 4 points </Text>
             <Text style={styles.earned}>  EARNED </Text>
             <View>
@@ -153,6 +156,14 @@ class Fav extends React.Component {
                   />
                 </View>
             </View>
+
+            <TouchableOpacity onPress={()=>this.gotoTeams()}>
+             <View>
+              <Text style={styles.achievement}>This week's winners </Text>
+              <Image style={styles.leadershipimage} source={require('../../../assets/leadership.png')} />
+            </View>
+            </TouchableOpacity>
+
             <View>
             <Text style={styles.achievement}> Recent history </Text>
                 <FlatList
@@ -163,12 +174,13 @@ class Fav extends React.Component {
                 />
             </View>
 
-            <TouchableOpacity onPress={()=>this.gotoTeams()}>
+            {/* <TouchableOpacity onPress={()=>this.gotoTeams()}>
               <View style={styles.teamButton} onPress={() => Alert.alert('Simple Button pressed')}> 
               <Text style={styles.textbtn}> View team board </Text>
               <Text style={styles.arrow}> >> </Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+          </ScrollView>
 
           </View>
         </SafeAreaView>
@@ -178,6 +190,11 @@ class Fav extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  leadershipimage:{
+    width: 400,
+    height: 180,
+    resizeMode: 'contain',
+  },
   teamButton:{
     backgroundColor: '#F1F6ED',
     color: '#F1F6ED',

@@ -85,7 +85,7 @@ class Recipe extends React.Component {
   render() {
     return (
         <SafeAreaView>
-          <Header navigation={this.props.navigation} Title={'Recipes'} isAtRoot={true} />
+          {/* <Header navigation={this.props.navigation} Title={'Recipes'} isAtRoot={true} /> */}
         
           <View style={styles.featuresBox}>
               <Icon name='fire' style={{color: '#444444' }} size={20} />
