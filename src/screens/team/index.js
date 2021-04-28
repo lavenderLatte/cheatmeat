@@ -56,29 +56,21 @@ class Team extends React.Component {
   render() {
     return (
         <SafeAreaView>
-                <Text style={styles.weak}> Week 4/26 </Text>
+          <Text style={styles.mainTitle}> Leaderboard </Text>
 
-        <View style={styles.competition}>
-        <Text style={styles.current}> Current Challenge: </Text>
-         <Text style={styles.challenge}> Eat Vegan for a Week </Text>
-         </View>
          <View style={styles.image}>
-            <Image style={styles.veganimage} source={require('../../../assets/vegan.png')}/>
+            <Image style={styles.veganimage} source={require('../../../assets/list.png')}/>
             </View>
-          <View style={styles.featuresBox}>
-              <Text style={styles.featured}> Team Leaderboard </Text>
-            <Icon name='fire' style={{color: '#444444' }} size={20} />
 
-          </View>
-
-          <View>
+   <Image style={styles.leaderboard} source={require('../../../assets/leaderboard2.png')}/>
+          {/* <View>
             <FlatList
                   vertical
                   data={HISTORY_DATA}
                   renderItem={this.renderHistoryCategory}
                   keyExtractor={item => `${item.id}`}
                 />
-          </View>
+          </View> */}
       </SafeAreaView>
     );
   }
@@ -91,11 +83,10 @@ export default (props) => {
 }
 const styles = StyleSheet.create({
     veganimage:{
-        width: 300,
-        height: 200,
+        width: 400,
+        height: 300,
         resizeMode: 'contain',
-        marginVertical: 20,
-        
+        marginBottom:  10,
     },
     image:{
                 justifyContent: 'center', 
@@ -124,6 +115,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 50,
+  },
+  mainTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginHorizontal: 10,
+    marginTop: 20,
+  },
+  leaderboard:{
+    height: 500,
+    width: 390,
+    resizeMode: 'contain',
   },
   categoriesPhoto: {
     width: '100%',
