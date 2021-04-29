@@ -172,7 +172,7 @@ class Store extends React.Component {
             )}
             {(this.state.imageViewType == 2) && (
               <ScrollView>
-                <Image source={require('../../../assets/discountinfo.png')} />
+                <Image source={require('../../../assets/montypopup.png')} style={styles.montypopup} />
               </ScrollView>
               )}
           </View>
@@ -183,6 +183,11 @@ class Store extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  montypopup:{
+    width: 400,
+    height: 420,
+
+  },
   filtermodal:{
      width: 400,
         height: 200,
